@@ -143,18 +143,16 @@ class CustomSpawner(dockerspawner.DockerSpawner):
 <br>
         <label for="mem">Select your desired memory size:</label>
         <select name="mem" size="1">
+  <option value="2G">  2GB</option>
   <option value="4G">  4GB</option>
   <option value="8G">  8GB </option>
   <option value="16G"> 16GB </option>
-  <option value="32G"> 32GB </option>
-  <option value="64G"> 64GB </option>
 </select>
 
 <br>
         <label for="gpu">GPU:</label>
         <select name="gpu" size="1">
-  <option value="Y">Yes</option>
-  <option value="N"> No </option>
+  <option value="N"> Not Available </option>
 </select>
 """
 
@@ -255,7 +253,7 @@ c.DockerSpawner.http_timeout = 600
 #notebook_dir = os.environ.get('DOCKER_NOTEBOOK_DIR') or '/home/jovyan/work'
 #c.DockerSpawner.notebook_dir = notebook_dir
 
-cvmfs_mount_dir = "/cvmfs/"#os.environ.get('DOCKER_NOTEBOOK_DIR') or '/home/jovyan/work'
+#cvmfs_mount_dir = "/cvmfs/"
 
 notebook_mount_dir = "/jupyter-users"#/{username}/"#os.environ.get('DOCKER_NOTEBOOK_DIR') or '/home/jovyan/work'
 #notebook_dir = "$PWD/persistent-area/{username}/"#os.environ.get('DOCKER_NOTEBOOK_DIR') or '/home/jovyan/work'
@@ -264,8 +262,8 @@ notebook_dir = os.environ.get('DOCKER_NOTEBOOK_DIR') or '/'
 # Mount the real user's Docker volume on the host to the notebook user's
 # notebook directory in the container
 #c.DockerSpawner.volumes = { 'jupyterhub-user-{username}': notebook_dir }
-c.DockerSpawner.volumes = {  notebook_mount_dir+"/scratch": {"bind": notebook_dir+"/scratch", "mode" : "rw" }, notebook_mount_dir+'/{username}/':
-{"bind": notebook_dir+"/persistent_area", "mode" : "rw" }, cvmfs_mount_dir : notebook_dir+"/cvmfs" }
+c.DockerSpawner.volumes = {  notebook_mount_dir+"/shared": {"bind": notebook_dir+"/shared", "mode" : "rw" }, notebook_mount_dir+'/{username}/':
+{"bind": notebook_dir+"/persistent_area", "mode" : "rw" } }
 
 # volume_driver is no longer a keyword argument to create_container()
 # c.DockerSpawner.extra_create_kwargs.update({ 'volume_driver': 'local' })
