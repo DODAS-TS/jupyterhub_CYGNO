@@ -191,12 +191,14 @@ class CustomSpawner(dockerspawner.DockerSpawner):
   </datalist>
 <br>
         <label for="mem">Select your desired memory size:</label>
+        <!-- MEM START -->
         <select name="mem" size="1">
   <option value="2G">  2GB</option>
   <option value="4G">  4GB</option>
   <option value="8G">  8GB </option>
   <option value="16G"> 16GB </option>
 </select>
+        <!-- MEM END -->
 
 <br>
         <label for="gpu">GPU:</label>
