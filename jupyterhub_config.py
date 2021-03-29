@@ -11,6 +11,7 @@ import json
 import os
 import base64
 import urllib
+import sys
 
 from tornado.auth import OAuth2Mixin
 from tornado import web
@@ -326,4 +327,14 @@ c.DockerSpawner.debug = True
 c.JupyterHub.hub_bind_url = 'http://:8088'
 c.JupyterHub.hub_connect_ip = 'jupyterhub'
 
+c.JupyterHub.admin_access = True
+
 #c.Authenticator.allowed_users = {'test'}
+
+c.JupyterHub.services = [
+    {
+        'name': 'idle-culler',
+        'admin': True,
+        'command': [sys.executable, '-m', 'jupyterhub_idle_culler', '--timeout=7200'],
+    }
+]
