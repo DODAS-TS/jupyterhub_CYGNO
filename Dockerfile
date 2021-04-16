@@ -7,6 +7,10 @@ RUN useradd test -p "$(openssl passwd -1 test)"
 RUN mkdir /home/test && chown test: /home/test
 COPY jupyterhub_config.py /srv/jupyterhub/jupyterhub_config.py
 
+# Install INFN-CLOUD CAs
+COPY ./ca.crt /usr/local/share/ca-certificates/ca.crt
+RUN update-ca-certificates
+
 RUN mkdir -p .init
 
 # COPY self registration da docker
