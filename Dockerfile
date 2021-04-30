@@ -6,7 +6,7 @@ RUN python3 -m pip install --no-cache -r /tmp/requirements.txt
 RUN useradd test -p "$(openssl passwd -1 test)"
 RUN mkdir /home/test && chown test: /home/test
 COPY jupyterhub_config.py /srv/jupyterhub/jupyterhub_config.py
-
+RUN python3 -m pip install wget
 # Install INFN-CLOUD CAs
 RUN wget "https://crt.sh/?d=2475254782" -O /usr/local/share/ca-certificates/ca.crt && \                                      
     update-ca-certificates 
