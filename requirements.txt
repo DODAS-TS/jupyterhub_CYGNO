@@ -1,3 +1,4 @@
+wget
 dockerspawner
 jupyterhub-dummyauthenticator
 oauthenticator==0.13.0
